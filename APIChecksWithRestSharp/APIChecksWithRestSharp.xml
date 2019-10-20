@@ -10,7 +10,6 @@
             </summary>
             <returns>All TodoItems</returns>
             <response code="200">Returns a list of all TodoItems</response>
-            <response code="401">If missing authorization header</response>
         </member>
         <member name="M:APIChecksWithRestSharp.Controllers.TodoController.GetById(System.Int64)">
             <summary>
@@ -19,7 +18,6 @@
             <param name="id"></param>
             <returns>Single ToDo Item</returns>
             <response code="200">Returns a single TodoItem</response>
-            <response code="401">If missing authorization header</response>
             <response code="404">If TodoItem ID is not found</response>
         </member>
         <member name="M:APIChecksWithRestSharp.Controllers.TodoController.Create(APIChecksWithRestSharp.Models.TodoItem)">
