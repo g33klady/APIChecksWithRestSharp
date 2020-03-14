@@ -11,4 +11,8 @@
     <PackageReference Include="RestSharp" Version="106.6.10" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\APIChecksWithRestSharp\APIChecksWithRestSharp.csproj" />
+  </ItemGroup>
+
 </Project>
