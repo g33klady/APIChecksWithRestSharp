@@ -25,20 +25,22 @@ namespace ApiChecks
         }
 
         [Test]
-        public void VerifyGetItem1ReturnsNameWalkTheDog()
+        public void VerifyGetTodoItemWithId1ReturnsId1()
         {
-            //TODO: Refactor - this Arrange is not DRY
             //Arrange
-            var client = new RestClient("https://localhost:44367/api/Todo/1");
+            var expectedId = 1;
+            var client = new RestClient($"https://localhost:44367/api/Todo/{expectedId}");
             var request = new RestRequest(Method.GET);
 
             //Act
-            IRestResponse<TodoItem> todoItem = client.Execute<TodoItem>(request);
+            IRestResponse<TodoItem> response = client.Execute<TodoItem>(request);
 
             //Assert
-            Assert.AreEqual(HttpStatusCode.OK, todoItem.StatusCode, $"GET todo item 1 did not return a success status code; it returned {todoItem.StatusCode}");
-            StringAssert.AreEqualIgnoringCase("Walk the Dog", todoItem.Data.Name, $"Actual name should have been 'walk the dog' but it was {todoItem.Data.Name}"); //This is fragile! 
-        }
+            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode, $"GET todo item w/ id {expectedId} did not return a success status code; it returned {response.StatusCode}");
 
+            Assert.AreEqual(expectedId, response.Data.Id, $"GET todo item w/ id {expectedId} did not return item with id {expectedId}, it returned {response.Data.Id}");
+
+            StringAssert.AreEqualIgnoringCase("Walk the dog", response.Data.Name, $"Actual name should have been 'Walk the dog' but was {response.Data.Name}");
+        }
     }
 }
