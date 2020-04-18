@@ -1,6 +1,7 @@
 ﻿using APIChecksWithRestSharp.Models;
 using NUnit.Framework;
 using RestSharp;
+using RestSharp.Authenticators;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -41,6 +42,31 @@ namespace ApiChecks
             Assert.AreEqual(expectedId, response.Data.Id, $"GET todo item w/ id {expectedId} did not return item with id {expectedId}, it returned {response.Data.Id}");
 
             StringAssert.AreEqualIgnoringCase("Walk the dog", response.Data.Name, $"Actual name should have been 'Walk the dog' but was {response.Data.Name}");
+        }
+
+        [Test]
+        public void VerifyPostWithAllValidValuesReturns201()
+        {
+            //Arrange
+            TodoItem expItem = new TodoItem
+            {
+                Name = "mow the lawn",
+                DateDue = new DateTime(2020, 12, 31),
+                IsComplete = false
+            };
+            var client = new RestClient("https://localhost:44367/api/Todo");
+            var request = new RestRequest(Method.POST);
+
+            request.RequestFormat = DataFormat.Json;
+            request.AddJsonBody(expItem);
+
+            request.AddHeader("CanAccess", "true");
+
+            //Act
+            IRestResponse response = client.Execute(request);
+
+            //Assert
+            Assert.AreEqual(HttpStatusCode.Created, response.StatusCode, $"Post new todo item did not return a Created status code; it returned {response.StatusCode}");
         }
     }
 }
