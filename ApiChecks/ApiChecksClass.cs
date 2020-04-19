@@ -48,7 +48,7 @@ namespace ApiChecks
         public void VerifyPostWithAllValidValuesReturns201()
         {
             //Arrange
-            TodoItem expItem = new TodoItem
+            TodoItem expectedItem = new TodoItem
             {
                 Name = "mow the lawn",
                 DateDue = new DateTime(2020, 12, 31),
@@ -58,15 +58,14 @@ namespace ApiChecks
             var request = new RestRequest(Method.POST);
 
             request.RequestFormat = DataFormat.Json;
-            request.AddJsonBody(expItem);
-
+            request.AddJsonBody(expectedItem);
             request.AddHeader("CanAccess", "true");
 
             //Act
             IRestResponse response = client.Execute(request);
 
             //Assert
-            Assert.AreEqual(HttpStatusCode.Created, response.StatusCode, $"Post new todo item did not return a Created status code; it returned {response.StatusCode}");
+            Assert.AreEqual(HttpStatusCode.Created, response.StatusCode, $"Post new todo item should have returned a Created status code; instead it returned {response.StatusCode}");
         }
     }
 }
