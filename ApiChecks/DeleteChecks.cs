@@ -31,14 +31,10 @@ namespace ApiChecks
                 DateDue = new DateTime(2020, 12, 31),
                 IsComplete = false
             };
-            var request = new RestRequest(Method.POST);
-
-            request.RequestFormat = DataFormat.Json;
-            request.AddJsonBody(item);
-            request.AddHeader("CanAccess", "true");
+            //var request = Helpers.PostTodoItemRequest(item);
 
             //Act
-            IRestResponse<TodoItem> response = _client.Execute<TodoItem>(request);
+            IRestResponse<TodoItem> response = _client.Execute<TodoItem>(Helpers.PostTodoItemRequest(item));
             testItem = response.Data;
         }
 
@@ -46,12 +42,10 @@ namespace ApiChecks
         public void VerifyDeleteWithValidIdReturns204()
         {
             //Arrange
-            var request = new RestRequest($"{testItem.Id}", Method.DELETE);
-            request.AddHeader("CanAccess", "true");
-            request.AddUrlSegment("id", testItem.Id);
+            //var request = Helpers.DeleteTodoItemRequest(testItem.Id);
 
             //Act
-            IRestResponse response = _client.Execute(request);
+            IRestResponse response = _client.Execute(Helpers.DeleteTodoItemRequest(testItem.Id));
 
             //Assert
             Assert.AreEqual(HttpStatusCode.NoContent, response.StatusCode, $"Delete todo item with id {testItem.Id} should have returned a NoContent response; instead it returned {response.StatusCode}");

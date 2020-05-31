@@ -25,10 +25,10 @@ namespace ApiChecks
         public void VerifyGetAllTodoItemsReturns200()
         {
             //Arrange
-            var request = new RestRequest(Method.GET);
+            //var request = Helpers.GetAllTodoItemsRequest();
 
             //Act
-            IRestResponse response = _client.Execute(request);
+            IRestResponse response = _client.Execute(Helpers.GetAllTodoItemsRequest());
 
             //Assert
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode, $"GET all todo items did not return a success status code; it returned {response.StatusCode}");
@@ -39,11 +39,10 @@ namespace ApiChecks
         {
             //Arrange
             var expectedId = 1;
-            var request = new RestRequest($"{expectedId}", Method.GET);
-            request.AddUrlSegment("id", expectedId);
+            //var request = Helpers.GetSingleTodoItemRequest(expectedId);
 
             //Act
-            IRestResponse<TodoItem> response = _client.Execute<TodoItem>(request);
+            IRestResponse<TodoItem> response = _client.Execute<TodoItem>(Helpers.GetSingleTodoItemRequest(expectedId));
 
             //Assert
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode, $"GET todo item w/ id {expectedId} did not return a success status code; it returned {response.StatusCode}");
@@ -63,14 +62,10 @@ namespace ApiChecks
                 DateDue = new DateTime(2020, 12, 31),
                 IsComplete = false
             };
-            var request = new RestRequest(Method.POST);
-
-            request.RequestFormat = DataFormat.Json;
-            request.AddJsonBody(expectedItem);
-            request.AddHeader("CanAccess", "true");
+            //var request = Helpers.PostTodoItemRequest(expectedItem);
 
             //Act
-            IRestResponse response = _client.Execute(request);
+            IRestResponse response = _client.Execute(Helpers.PostTodoItemRequest(expectedItem));
 
             //Assert
             Assert.AreEqual(HttpStatusCode.Created, response.StatusCode, $"Post new todo item should have returned a Created status code; instead it returned {response.StatusCode}");
@@ -80,15 +75,10 @@ namespace ApiChecks
         public string VerifyPut(TodoItem item)
         {
             //Arrange
-            var request = new RestRequest("1", Method.PUT);
-
-            request.RequestFormat = DataFormat.Json;
-            request.AddJsonBody(item);
-            request.AddHeader("CanAccess", "true");
-            request.AddUrlSegment("id", 1);
+            //var request = Helpers.PutTodoItemRequest(1, item);
 
             //Act
-            IRestResponse response = _client.Execute(request);
+            IRestResponse response = _client.Execute(Helpers.PutTodoItemRequest(1, item));
 
             //Assert
             return response.StatusCode.ToString();
