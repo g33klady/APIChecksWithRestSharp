@@ -9,18 +9,9 @@ using System.Net;
 namespace ApiChecks
 {
     [TestFixture]
-    public class DeleteChecks
+    public class DeleteChecks : ApiCheckBase
     {
         private TodoItem testItem;
-        private static string _baseUrl;
-        private static RestClient _client;
-
-        [OneTimeSetUp]
-        public void TestClassInitialize()
-        {
-            _baseUrl = "https://localhost:44367/api/Todo";
-            _client = new RestClient(_baseUrl);
-        }
 
         [SetUp]
         public void TestDataSetup()

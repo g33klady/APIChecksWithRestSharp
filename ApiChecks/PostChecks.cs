@@ -9,18 +9,9 @@ using System.Net;
 namespace ApiChecks
 {
     [TestFixture]
-    public class PostChecks
+    public class PostChecks : ApiCheckBase
     {
-        private static string _baseUrl;
-        private static RestClient _client;
         private TodoItem testItem;
-
-        [OneTimeSetUp]
-        public void TestClassInitialize()
-        {
-            _baseUrl = "https://localhost:44367/api/Todo";
-            _client = new RestClient(_baseUrl);
-        }
 
         [TearDown]
         public void TestDataCleanUp()
@@ -30,6 +21,7 @@ namespace ApiChecks
             {
                 Console.WriteLine($"Unable to delete {testItem.Id} - {response.StatusCode}");
             }
+            //this could easily be a database cleanup script call
         }
 
         [Test]
