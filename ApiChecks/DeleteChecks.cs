@@ -25,12 +25,7 @@ namespace ApiChecks
         [SetUp]
         public void TestDataSetup()
         {
-            TodoItem item = new TodoItem
-            {
-                Name = $"DeleteChecks item {new DateTime().Ticks}",
-                DateDue = new DateTime(2020, 12, 31),
-                IsComplete = false
-            };
+            TodoItem item = Helpers.GetTestTodoItem(name: $"DeleteChecks item {new DateTime().Ticks}");
             //var request = Helpers.PostTodoItemRequest(item);
 
             //Act

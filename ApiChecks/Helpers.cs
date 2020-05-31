@@ -47,5 +47,19 @@ namespace ApiChecks
             request.AddUrlSegment("id", id);
             return request;
         }
+
+        public static TodoItem GetTestTodoItem(string name = "mow the lawn", bool isCompleted = false, DateTime dateDue = default(DateTime))
+        {
+            if(dateDue == default(DateTime))
+            {
+                dateDue = new DateTime(2029, 12, 31);
+            }
+            return new TodoItem
+            {
+                Name = "mow the lawn",
+                DateDue = new DateTime(2020, 12, 31),
+                IsComplete = false
+            };
+        }
     }
 }
