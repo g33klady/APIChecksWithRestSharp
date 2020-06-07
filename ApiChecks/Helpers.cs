@@ -48,7 +48,7 @@ namespace ApiChecks
             return request;
         }
 
-        public static TodoItem GetTestTodoItem(string name = "mow the lawn", bool isCompleted = false, DateTime dateDue = default(DateTime))
+        public static TodoItem GetTestTodoItem(string name = "mow the lawn", bool isComplete = false, DateTime dateDue = default(DateTime))
         {
             if(dateDue == default(DateTime))
             {
@@ -56,9 +56,9 @@ namespace ApiChecks
             }
             return new TodoItem
             {
-                Name = "mow the lawn",
-                DateDue = new DateTime(2020, 12, 31),
-                IsComplete = false
+                Name = name,
+                DateDue = dateDue,
+                IsComplete = isComplete
             };
         }
     }

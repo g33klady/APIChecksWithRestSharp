@@ -71,17 +71,8 @@ namespace ApiChecks
             get
             {
                 yield return new TestCaseData(Helpers.GetTestTodoItem()).Returns("NoContent").SetName("happy path");
-                yield return new TestCaseData(new TodoItem
-                {
-                    Name = "",
-                    DateDue = new DateTime(2020, 12, 31),
-                    IsComplete = false
-                }).Returns("BadRequest").SetName("blank name");
-                yield return new TestCaseData(new TodoItem
-                {
-                    DateDue = new DateTime(2020, 12, 31),
-                    IsComplete = false
-                }).Returns("BadRequest").SetName("missing name field");
+                yield return new TestCaseData(Helpers.GetTestTodoItem(name: "")).Returns("BadRequest").SetName("blank name");
+                yield return new TestCaseData(Helpers.GetTestTodoItem(name: null)).Returns("BadRequest").SetName("missing name field");
             }
         }
     }
