@@ -38,5 +38,8 @@ namespace ApiChecks
             //Assert
             Assert.AreEqual(HttpStatusCode.Created, response.StatusCode, $"Post new todo item should have returned a Created status code; instead it returned {response.StatusCode}");
         }
+
+        //TODO: parameterize checks for invalid name, missing name, invalid datedue; include security checks - xss, sql injection
+        //TODO: POST performance check; use Stopwatch
     }
 }

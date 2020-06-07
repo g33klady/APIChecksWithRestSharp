@@ -36,5 +36,8 @@ namespace ApiChecks
             //Assert
             Assert.AreEqual(HttpStatusCode.NoContent, response.StatusCode, $"Delete todo item with id {testItem.Id} should have returned a NoContent response; instead it returned {response.StatusCode}");
         }
+
+        //TODO: DELETE check w/out a token - may need to modify Helper method or can we remove the header in the check?
+        //TODO: DELETE performance check - use Stopwatch
     }
 }

@@ -43,6 +43,8 @@ namespace ApiChecks
             StringAssert.AreEqualIgnoringCase("Walk the dog", response.Data.Name, $"Actual name should have been 'Walk the dog' but was {response.Data.Name}");
         }
 
+        //TODO: GET all performance check; use Stopwatch
+
         [Test, TestCaseSource(typeof(TestDataClass), "PutTestData")]
         public string VerifyPut(TodoItem item)
         {
@@ -55,6 +57,11 @@ namespace ApiChecks
             //Assert
             return response.StatusCode.ToString();
         }
+
+        //TODO: PUT performance check; use Stopwatch
+        //TODO: PUT security checks w/ xss and sql injection - maybe add to parameterization?
+
+        //TODO: lifecycle check (GET -> POST -> GET -> PUT -> GET -> DELETE -> GET)
     }
 
     public class TestDataClass
